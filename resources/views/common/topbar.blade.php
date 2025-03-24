@@ -1,13 +1,13 @@
 <header class="navbar navbar-dark sticky-top backg flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/">Dharmender</a>
-    {{-- <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
         data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
+    {{-- <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
         aria-label="Search"> --}}
-    <div class="navbar-nav">
+    <div class="navbar-nav d-none d-md-block">
         <div class="nav-item text-nowrap px-3">
         <li class="dropdown pc-h-item header-user-profile">
                 <a class="pc-head-link dropdown-toggle arrow-none me-0 nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="true">
@@ -83,13 +83,6 @@
                   </div>
                 </div>
               </li>
-
-
-
-
-
-
-
         </div>
     </div>
 </header>
