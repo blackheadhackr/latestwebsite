@@ -21,9 +21,14 @@ class Category extends Controller
             if($data->save()){
                 toastr()->success('Category added Successfully');
                 return redirect()->route('catg');
+            }else{
+                toastr()->error('Something Went Wrong');
+                return redirect()->route('catg');
             }
         }else{
-            return "something went wrong";
+            toastr()->error('Something Went Wrong');
+                return redirect()->route('catg');
         }
     }
+    
 }

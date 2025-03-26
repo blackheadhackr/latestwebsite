@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Categor;
 class Homecontroller extends Controller
 {
     public function home(){
-        return view('admin.home');
+        $data = Categor::all();
+        return view('admin.catg', compact('data'));
     }
+    
 }
