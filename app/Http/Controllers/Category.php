@@ -19,7 +19,8 @@ class Category extends Controller
             $data = new Categor;
             $data->name = $req->catgname;
             if($data->save()){
-                return "data added successfully";
+                toastr()->success('Category added Successfully');
+                return redirect()->route('catg');
             }
         }else{
             return "something went wrong";

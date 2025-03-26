@@ -7,5 +7,5 @@ use App\Http\Controllers\Category;
 Route::get('/', function () {
     return view('welcome');
 });
-route::get('category',[Homecontroller::class, 'home']);
+route::get('category',[Homecontroller::class, 'home'])->name('catg');
 route::post('addcategory',[Category::class, 'add_catg'])->name('add-category');
