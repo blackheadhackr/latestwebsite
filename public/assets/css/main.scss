@@ -125,3 +125,8 @@ body {
   color: #6c757d;
   white-space: nowrap;
 }
+/* Remove input shadow and change border color */
+.form-control:focus {
+  box-shadow: none !important;
+  border-color: var(--background) !important; /* Replace with your desired color */
+}

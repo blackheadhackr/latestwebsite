@@ -10,7 +10,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/category">
                     <span data-feather="file" class="align-text-bottom"></span>
-                    Add Category
+                    Categories & Tags
                 </a>
             </li>
             <li class="nav-item">
