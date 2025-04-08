@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Categor;
 use App\Models\Addtagsmodel;
 
@@ -65,6 +66,24 @@ class Category extends Controller
         $id= $req->input('id');
         $data = Categor::find($id);
         return Response()->json($data);
+    }
+    public function categoryeditsub(Request $req){
+
+        $validation = validator::make($req->all(),
+            [
+                'edtctg' => 'required|regex:/^[A-Za-z]+$/|max:255|unique:category,name',
+            ],[
+                'required' => 'Please fill this feild first',
+                'regex' => 'Special characters are not allowed',
+                'unique' => 'This name is already added',
+                'max' => 'you have reached max limit please make it short'
+            ]
+        );
+        if($validation->fails()){
+            return response()->json(['error'=>$validation->errors()],422);
+        }else{
+            echo "every things is good";
+        }
     }
     
 }
