@@ -41,7 +41,7 @@
                                     <td>{{ $a->name }}</td>
                                     <td>
                                         <button type="button" class="btn btn-success catgedit" id="{{ $a->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
-                                        <button type="button" class="btn btn-danger" id="{{ $a->id }}"><i
+                                        <button type="button" class="btn btn-danger catgdel" id="{{ $a->id }}"><i
                                                 class="bi bi-trash-fill"></i></button>
                                     </td>
                                 </tr>
@@ -108,9 +108,10 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <span id="editsuccessmsg" class="text-success"></span>
                   <form id="categoryeditform">
                     @csrf
-                    <input type="hidden" class="form-control" id="editctgid" name="id">
+                    <input type="hidden" class="form-control" id="editctgid" name="eid">
                     <div class="mb-3">
                       <label for="editctg" class="col-form-label">Edit Category Name:</label>
                       <input type="text" class="form-control" id="editctg" name="edtctg">
@@ -124,7 +125,7 @@
               </div>
             </div>
           </div>
-    </div>
+        </div>
     <script>
         $(document).ready(function() {
 
@@ -140,8 +141,9 @@
                 scrollY: '500px'
             });
         });
-        // get single data using ajax code
+        
         $(document).ready(function() {
+            // get single data using ajax code
             $(document).on('click','.catgedit', function(){
                 var id = $(this).attr("id");
                 $.ajax({
@@ -155,30 +157,68 @@
                     }
                 })
             });  
-        // form submit edit category
-        $(document).on('submit',"#categoryeditform",function(e){
-            e.preventDefault();
-            var form = $(this).serialize();
-            $.ajax({
-                url:"{{route('categoryeditsubmit')}}",
-                type:"post",
-                dataType:"json",
-                data: $(this).serialize(),
-                success:function(data){
-                    // success message
-                },
-                error: function(err) {
-                    if (err.status === 422) {
-                        var errors = err.responseJSON.error;
-                        if(errors.edtctg){
-                            $('#cater').text(errors.edtctg[0]);
-                        }
-                    } else {
-                        $('#cater').text("An unexpected error occurred.");
+            // form submit edit category
+            $(document).on('submit',"#categoryeditform",function(e){
+                e.preventDefault();
+                var form = $(this).serialize();
+                $.ajax({
+                    url:"{{route('categoryeditsubmit')}}",
+                    type:"post",
+                    dataType:"json",
+                    data: $(this).serialize(),
+                    success:function(data){
+                    if(data.status === 200){
+                        $('#editsuccessmsg').html(data.sdta);
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
                     }
-                }
+                    },
+                    error: function(err) {
+                        if (err.status === 422) {
+                            var errors = err.responseJSON.error;
+                            if(errors.edtctg){
+                                $('#cater').text(errors.edtctg[0]);
+                            }
+                        }
+                    }
+                });
             });
-        });
+            // data delete function 
+            $(document).on('click','.catgdel',function(){
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var delid = $(this).attr('id');
+                        $.ajax({
+                            url : '{{route("delete-category")}}',
+                            type: 'POST',
+                            data : { _token : '{{csrf_token()}}', 'id':delid},
+                            dataType : 'json',
+                            success : function(data){
+                                if(data.status === 200){
+                                    Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.message,
+                                    icon: "success"
+                                    });
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 3000);
+                                }  
+                            }
+                        });
+                    }
+
+                });                
+            })
         });
     </script>
 @endsection

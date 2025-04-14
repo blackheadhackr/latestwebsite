@@ -13,3 +13,4 @@ Route::post('addtags',[Category::class , 'add_tags'])->name('add-tags');
 /** get single category and tags */
 Route::post('singlecatg',[Category::class, 'get_single_catg'])->name('get_singlecatg');
 Route::post('editcatg',[Category::class, 'categoryeditsub'])->name('categoryeditsubmit');
+Route::post('delcatg',[Category::class, 'catgdel'])->name('delete-category');

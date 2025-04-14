@@ -67,6 +67,7 @@ class Category extends Controller
         $data = Categor::find($id);
         return Response()->json($data);
     }
+    /* ===================================== Update Category functions ===================================== */
     public function categoryeditsub(Request $req){
 
         $validation = validator::make($req->all(),
@@ -82,8 +83,21 @@ class Category extends Controller
         if($validation->fails()){
             return response()->json(['error'=>$validation->errors()],422);
         }else{
-            echo "every things is good";
+           $data = Categor::find($req->input('eid'));
+           $data->name = $req->input('edtctg');
+           if($data->save()){
+            return response()->json([ 'status' => 200,'sdta'=> 'Data Uploaded Successfully']);
+           }else{
+            return response()->json(['status' => 500,'message' => 'Failed to update category.'],500);
+           }
         }
+    }
+    /* ===================================== Delete category functions ===================================== */
+    public function catgdel(Request $req){
+       $id = $req->input('id');
+
+       $data = Categor::destroy($id);
+       return response()->json(['status' => 200 , 'message' => 'Record is deleted permanently']);
     }
     
 }
