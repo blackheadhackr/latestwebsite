@@ -14,9 +14,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                    Products
+                <a class="nav-link {{request()->routeIs('jokes') ? 'active' : ''}}" href="{{route('jokes')}}">
+                    <i class="bi bi-emoji-laughing-fill"></i>
+                    Add Jokes
                 </a>
             </li>
             <li class="nav-item">

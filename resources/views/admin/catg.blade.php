@@ -85,8 +85,8 @@
                         <th scope="row">{{$sno}}</th>
                         <td>{{$a->name}}</td>
                         <td> 
-                          <button type="button" class="btn btn-success" id="{{$a->id}}"><i class="bi bi-pencil-square"></i></button>
-                          <button type="button" class="btn btn-danger" id="{{$a->id}}"><i class="bi bi-trash-fill"></i></button>
+                          <button type="button" class="btn btn-success edttag" id="{{$a->id}}" data-bs-toggle="modal" data-bs-target="#tagsmodel"><i class="bi bi-pencil-square"></i></button>
+                          <button type="button" class="btn btn-danger deltag" id="{{$a->id}}"><i class="bi bi-trash-fill"></i></button>
                         </td>
                       </tr>
                       @php
@@ -126,6 +126,33 @@
             </div>
           </div>
         </div>
+        {{-- model Tags --}}
+        <div class="modal fade" id="tagsmodel" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Tags Edit</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span id="edittagmsg" class="text-success"></span>
+                  <form id="tageditform">
+                    @csrf
+                    <input type="hidden" class="form-control" id="edittagid" name="eid">
+                    <div class="mb-3">
+                      <label for="tagsedit" class="col-form-label">Edit Tag Name:</label>
+                      <input type="text" class="form-control" id="tagsedit" name="edttag">
+                      <span class="text-danger" id="tager"></span>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Submit Form</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     <script>
         $(document).ready(function() {
 
@@ -141,7 +168,7 @@
                 scrollY: '500px'
             });
         });
-        
+        // category code here =================================>
         $(document).ready(function() {
             // get single data using ajax code
             $(document).on('click','.catgedit', function(){
@@ -167,12 +194,12 @@
                     dataType:"json",
                     data: $(this).serialize(),
                     success:function(data){
-                    if(data.status === 200){
-                        $('#editsuccessmsg').html(data.sdta);
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1500);
-                    }
+                        if(data.status === 200){
+                            $('#editsuccessmsg').html(data.sdta);
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1500);
+                        }
                     },
                     error: function(err) {
                         if (err.status === 422) {
@@ -219,6 +246,84 @@
 
                 });                
             })
+        });
+        // Tags code here =================================>
+        $(document).ready(function(){
+            // get single tag code
+            $(document).on('click','.edttag', function(){
+                var id = $(this).attr('id');
+                $.ajax({
+                    url : "{{route('get_singletags')}}",
+                    type : "post",
+                    data :  { _token : "{{csrf_token()}}", "id":id},
+                    dataType : "json",
+                    success : function(data){
+                        $('#edittagid').val(data.id);
+                        $('#tagsedit').val(data.name);
+                    }
+                })
+            });
+            // edit tags code here
+            $(document).on('submit','#tageditform', function(e){
+                e.preventDefault();
+                var form = $(this).serialize();
+                $.ajax({
+                    url : "{{route('tagseditsubmit')}}",
+                    type : "post",
+                    data : $(this).serialize(),
+                    dataType : "json",
+                    success : function(data){
+                        if(data.status === 200){
+                            $('#edittagmsg').text(data.sdta);
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1500);
+                        }
+                    },
+                    error:function(err){
+                        if(err.status === 422){
+                            var errors = err.responseJSON.error;
+                            if(errors.edttag){
+                                $('#tager').text(errors.edttag[0]);
+                            }
+                        }
+                    }
+                });
+            });
+            $(document).on('click', '.deltag', function(){
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var id = $(this).attr('id');
+                        $.ajax({
+                            url : "{{route('delete-tags')}}",
+                            type : "post",
+                            data : { _token : "{{ csrf_token() }}", "id":id},
+                            dataType : "json",
+                            success : function(data){
+                                if(data.status === 200){
+                                    Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.message,
+                                    icon: "success"
+                                    });
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 3000);
+                                }
+                            }
+                        });
+                    }
+
+                });
+            });
         });
     </script>
 @endsection

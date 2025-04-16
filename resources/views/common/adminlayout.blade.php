@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="author" content="Dharmender Kumar">
         <meta name="generator" content="Hugo 0.104.2">
         <title>@yield('title')</title>
         <link rel="canonical" href="http://127.0.0.1:8000/">
