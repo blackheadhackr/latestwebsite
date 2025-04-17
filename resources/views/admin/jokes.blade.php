@@ -2,5 +2,7 @@
 @section('title','Jokes'){{-- include Dynamic title --}}
 @section('pagename','Jokes'){{-- include Page name--}}
 @section('main'){{-- include main content section--}}
-<h1>hello</h1>
+<div class="container p-3">
+    main section
+</div>
 @endsection
