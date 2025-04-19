@@ -11,6 +11,7 @@ Route::get('/', function () {
 /**Home controller */
 route::get('category',[Homecontroller::class, 'cattag'])->name('catg');
 Route::get('jokes',[Homecontroller::class, 'jokes'])->name('jokes');
+Route::get('jokes-image',[Homecontroller::class , 'jokesimg'])->name('jokesimage');
 
 /** category and tags */
 route::post('addcategory',[Category::class, 'add_catg'])->name('add-category');
@@ -21,5 +22,5 @@ Route::post('editcatg',[Category::class, 'categoryeditsub'])->name('categoryedit
 Route::post('edittags',[Category::class, 'tagseditsub'])->name('tagseditsubmit');
 Route::post('delcatg',[Category::class, 'catgdel'])->name('delete-category');
 Route::post('deltag',[Category::class, 'tagdel'])->name('delete-tags');
-
-/** Jokes  */
+/** ======================= Jokes ======================= */
+Route::post('jokes-image',[Jokescontroller::class, 'addjokesimage'])->name('addjokesimg');

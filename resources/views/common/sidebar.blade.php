@@ -20,9 +20,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="users" class="align-text-bottom"></span>
-                    Customers
+                <a class="nav-link {{request()->routeIs('jokesimage') ? 'active' : ''}}" href="{{route('jokesimage')}}">
+                    <i class="bi bi-images"></i>
+                    jokes images
                 </a>
             </li>
             <li class="nav-item">

@@ -15,5 +15,8 @@ class Homecontroller extends Controller
     public function jokes(){
         return view('admin.jokes');
     }
+    public function jokesimg(){
+        return view('admin.jokesimg');
+    }
     
 }

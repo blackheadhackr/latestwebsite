@@ -1,5 +1,5 @@
 @extends('common.adminlayout'){{-- include template --}}
-@section('title', 'Catg & Tags'){{-- include Dynamic title --}}
+@section('title', 'Jokes-point : Catg & Tags'){{-- include Dynamic title --}}
 @section('pagename', 'Category & Tags') {{-- include Page name --}}
 @section('main'){{-- include main content section --}}
     <div class="container p-3">
@@ -9,7 +9,7 @@
                 <form class="row g-3" action="{{ route('add-category') }}" method="POST">
                     @csrf
                     <div class="col-md-12">
-                        <label for="catgname" class="form-label">Category Name</label>
+                        <label for="catgname" class="form-label">Category Name<span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('catgname') {{ 'is-invalid' }} @enderror"
                             id="catgname" name="catgname" value="{{ old('catgname') }}">
                         <span class="text-danger">
@@ -59,7 +59,7 @@
                 <form class="row g-3" action="{{route('add-tags')}}" method="POST">
                     @csrf
                     <div class="col-md-12">
-                        <label for="catgname" class="form-label">Tag Name</label>
+                        <label for="catgname" class="form-label">Tag Name<span class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('tagsname') {{'is-invalid'}} @enderror" id="catgname" name="tagsname" value="{{old('tagsname')}}">
                         <span class="text-danger">@error('tagsname') {{$message}} @enderror</span>
                     </div>
@@ -99,6 +99,7 @@
                 </div>
             </div>
         </div>
+    </div>
         {{-- model catg --}}
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
