@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\JokeimgModel;
+use App\Models\Categor;
 
 class Jokescontroller extends Controller
 {
@@ -40,5 +41,10 @@ class Jokescontroller extends Controller
             }
         }
 
+    }
+    public function editjokesimage($id){
+        $data = JokeimgModel::find($id);
+        $catg = Categor::orderby('id','desc')->get();
+        return view('admin.editjokesimg',compact('data','catg'));
     }
 }
