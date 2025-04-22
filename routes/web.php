@@ -6,7 +6,7 @@ use App\Http\Controllers\Category;
 use App\Http\Controllers\Jokescontroller;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.dashboard');
 });
 /**Home controller */
 route::get('category',[Homecontroller::class, 'cattag'])->name('catg');

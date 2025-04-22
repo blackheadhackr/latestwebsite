@@ -8,6 +8,13 @@ body {
   --active-sidebar:#7fbef9;
   --logout-btn:#f74b4b;
   --logout-btn-hover:#f92a2a;
+  --text-color: #7d84ab;
+  --main: #b4bbe1;
+  --secondary-text-color: #dee2ec;
+  --bg-color: #0c1e35;
+  --navbar: #143157;
+  --secondary-bg-color: #0b1a2c;
+  --border-color: rgba(#535d7d, 0.3);
 
 }
 .feather {
@@ -133,4 +140,73 @@ body {
 .form-select:focus {
   box-shadow: none !important;
   border-color: var(--background) !important; /* Replace with your desired color */
+}
+
+// dashboard =====================================================>
+
+// dashboard cards css================================>
+.bg-c-red {
+  background: var(--navbar);
+}
+
+.bg-c-green {
+  background: var(--secondary-bg-color);
+}
+
+.total-card .text-left h4 {
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 5px;
+  font-size: 22px;
+}
+
+.total-card .text-left p {
+  color: #fff;
+  font-size: 15px;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.total-card .value-badges {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+}
+
+.card .card-block {
+  padding: 20px;
+}
+
+.text-c-red {
+  color: #ff5252;
+}
+
+.text-c-green {
+  color: #11c15b;
+}
+
+.card .card-block p {
+  line-height: 1.4;
+}
+
+.label {
+  border-radius: 4px;
+  font-size: 75%;
+  padding: 4px 7px;
+  margin-right: 5px;
+  font-weight: 400;
+  color: #fff !important;
+}
+.order-visitor-card {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.order-visitor-card:hover{
+  background: var(--navbar) !important;
+  color: var(--main);
+}
+.f-icon{
+  font-size: 30px !important;
 }
