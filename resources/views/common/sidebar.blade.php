@@ -21,14 +21,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link {{request()->routeIs('jokesimage') ? 'active' : ''}}" href="{{route('jokesimage')}}">
-                    <i class="bi bi-images"></i>
+                    <i class="bi bi-camera2"></i>
                     jokes images
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-                    Reports
+                    <i class="bi bi-substack"></i>
+                    Blog
                 </a>
             </li>
             <li class="nav-item">

@@ -9,7 +9,8 @@ class Jokescontroller extends Controller
 {
     public function addjokesimage(Request $req){
         $validation = $req->validate([
-            'jokestitle' => 'required|regex:/^[A-Za-z\s]+$/|max:255|unique:jokesimg,joke_name',
+            'jokestitle' => 'required|regex:/^[A-Za-z\s]+$/|max:255|unique:jokesimg,title',
+            'catgselect' => 'required|regex:/^[A-Za-z\s]+$/',
             'jokesdesc' => 'required|string',
             'jokeimg' => 'required | image | mimes:jpg,jpeg,png,svg| max:512',
         ],[
@@ -21,7 +22,22 @@ class Jokescontroller extends Controller
             'max' => 'file size not more then 500KB'
         ]);
         if($validation){
-            echo "everything is good";
+            // return JokeimgModel::all();
+            $path = $req->file('jokeimg')->store('jokesimg','public');
+            // return $path;
+            if($path){
+                $data = new JokeimgModel;
+                $data->title = $req->input('jokestitle');
+                $data->desc = $req->input('jokesdesc');
+                $data->catg = $req->input('catgselect');
+                $data->image = $path;
+                if($data->save()){
+                    toastr()->success('Jokes uploaded successfully.');
+                    return redirect()->route('addjokesimg');
+                }else{
+                    return "something went wrong";
+                }
+            }
         }
 
     }

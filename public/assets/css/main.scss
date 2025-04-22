@@ -130,3 +130,7 @@ body {
   box-shadow: none !important;
   border-color: var(--background) !important; /* Replace with your desired color */
 }
+.form-select:focus {
+  box-shadow: none !important;
+  border-color: var(--background) !important; /* Replace with your desired color */
+}
