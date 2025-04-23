@@ -25,3 +25,4 @@ Route::post('deltag',[Category::class, 'tagdel'])->name('delete-tags');
 /** ======================= Jokes ======================= */
 Route::post('jokes-image',[Jokescontroller::class, 'addjokesimage'])->name('addjokesimg');
 Route::get('edit-jokes-image/{id}',[Jokescontroller::class, 'editjokesimage'])->name('editjokesimg');
+Route::post('update-jokes-image',[Jokescontroller::class, 'updatejokesimg'])->name('updatejokesimg');

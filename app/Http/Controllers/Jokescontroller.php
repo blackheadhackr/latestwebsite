@@ -47,4 +47,7 @@ class Jokescontroller extends Controller
         $catg = Categor::orderby('id','desc')->get();
         return view('admin.editjokesimg',compact('data','catg'));
     }
+    public function updatejokesimg(Request $req){
+        return $req->post();
+    }
 }
