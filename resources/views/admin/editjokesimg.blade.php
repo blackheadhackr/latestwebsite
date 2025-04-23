@@ -55,8 +55,8 @@
             var input = $(this).val();
             var sum = 156 - input.length;
             
-            if (input.length > 155) {
-            input = input.substring(0, 155);
+            if (input.length > 156) {
+            input = input.substring(0, 156);
             $(this).val(input);
             }
 

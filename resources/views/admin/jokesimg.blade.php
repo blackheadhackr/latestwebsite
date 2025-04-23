@@ -66,7 +66,7 @@
                   <td>{{$data->catg}}</td>
                   <td><a href="{{asset('storage/'.$data->image)}}" class="btn btn-warning text-white" target="_blank"><i class="bi bi-eye-fill"></i></a>
                   <a href="{{route('editjokesimg', ['id'=>$data->id])}}" class="btn btn-success"><i class="bi bi-pen-fill"></i></a>
-                  <a href="#" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a></td>
+                  <i class="bi bi-trash-fill btn btn-danger delbtnimg" id="{{$data->id}}"></i></td>
                 </tr>
                 @php
                     $sn++
@@ -89,6 +89,40 @@
             }
 
             $('.charCount').text("only "+sum+" charecter left");
+        });
+        $(document).on('click','.delbtnimg',function(){
+            Swal.fire({
+            title: "Are you sure?",
+            text: "This will be permanently deleted.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).attr('id');
+                    $.ajax({
+                        url : "{{route('deletejokesimg')}}",
+                        type: "post",
+                        data: { _token : '{{csrf_token()}}', 'id':id },
+                        dataType: "json",
+                        success:function(data){
+                            if(data.status === 200){
+                                Swal.fire({
+                                title: "Deleted!",
+                                text: data.msg,
+                                icon: "success"
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 3000);
+
+                            }
+                        }
+                    });
+                }
+            });
         });
     });
 </script>
