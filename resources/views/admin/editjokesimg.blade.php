@@ -9,6 +9,9 @@
             <form class="row g-3" action="{{route('updatejokesimg')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" name="id" value="{{$data->id}}">
+
+                <input type="hidden" name="editid" value="{{$data->id}}">
+
                 <div class="col-md-6">
                     <label for="catg" class="form-label">Category<span class="text-danger">*</span></label>
                     <select class="form-select @error('catgselect') {{'is-invalid'}} @enderror" aria-label="Default select example" id="catg" name="catgselect">
@@ -45,7 +48,6 @@
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
-            
         </div>
     </div>
 </div>
