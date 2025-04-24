@@ -2,6 +2,8 @@
 @section('title', 'Jokes-point : Catg & Tags'){{-- include Dynamic title --}}
 @section('pagename', 'Category & Tags') {{-- include Page name --}}
 @section('main'){{-- include main content section --}}
+
+
     <div class="container p-3">
         <div class="row">
             {{-- ================== Category ================== --}}

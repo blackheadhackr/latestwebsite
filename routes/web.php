@@ -12,7 +12,6 @@ Route::get('/', function () {
 route::get('category',[Homecontroller::class, 'cattag'])->name('catg');
 Route::get('jokes',[Homecontroller::class, 'jokes'])->name('jokes');
 Route::get('jokes-image',[Homecontroller::class , 'jokesimg'])->name('jokesimage');
-
 /** category and tags */
 route::post('addcategory',[Category::class, 'add_catg'])->name('add-category');
 Route::post('addtags',[Category::class , 'add_tags'])->name('add-tags');

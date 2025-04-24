@@ -71,6 +71,7 @@ class Jokescontroller extends Controller
                     $data->title = $req->input('jokestitle');
                     $data->desc = $req->input('jokesdesc');
                     $data->image = $path;
+                    $data->updated_at = now()->setTimezone(config('app.timezone'))->format('Y-m-d H:i:s');
                     $data->catg = $req->input('catgselect');
                     if($data->save()){
                         toastr()->success('Jokes Updated Successfully.');
@@ -96,6 +97,7 @@ class Jokescontroller extends Controller
                 $data->title = $req->input('jokestitle');
                 $data->desc = $req->input('jokesdesc');
                 $data->catg = $req->input('catgselect');
+                $data->updated_at = now()->setTimezone(config('app.timezone'))->format('Y-m-d H:i:s');
                 if($data->save()){
                     toastr()->success('Jokes Updated Successfully.');
                     return redirect()->route('jokesimage');
