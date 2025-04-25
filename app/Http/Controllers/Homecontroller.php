@@ -21,5 +21,8 @@ class Homecontroller extends Controller
         $jokeimg = JokeimgModel::orderby('id', 'desc')->get();
         return view('admin.jokesimg', compact('catg','jokeimg'));
     }
+    public function login(){
+        return view('admin.login');
+    }
     
 }
